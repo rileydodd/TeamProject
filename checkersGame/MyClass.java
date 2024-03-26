@@ -1,4 +1,4 @@
-package client;
+package checkersGame;
 
 public class MyClass {
 
