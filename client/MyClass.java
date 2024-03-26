@@ -6,5 +6,7 @@ public class MyClass {
 		System.out.println("Hello");
 		
 		System.out.println("Another Print Statement");
+		
+		System.out.println("Third print statement");
 	}
 }
