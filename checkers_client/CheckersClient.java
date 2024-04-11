@@ -4,7 +4,6 @@ import java.awt.CardLayout;
 import java.io.IOException;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import ocsf.client.AbstractClient;
 import checkers_multiplayer.Player;
 import checkers_multiplayer.Peice;
 
