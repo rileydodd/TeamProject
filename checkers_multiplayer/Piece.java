@@ -1,5 +1,5 @@
 package checkers_multiplayer;
 
-public class Peice {
+public class Piece {
 
 }
