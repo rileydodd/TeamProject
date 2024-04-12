@@ -27,7 +27,13 @@ public class CheckersClient extends AbstractClient {
 		}
 	}
 	
-	public void set_user(Player user) {
+	private void openConnection()
+    {
+        // TODO Auto-generated method stub
+        
+    }
+
+    public void set_user(Player user) {
 		this.user = user;
 	}
 
