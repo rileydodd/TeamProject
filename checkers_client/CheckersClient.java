@@ -5,7 +5,7 @@ import java.io.IOException;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import checkers_multiplayer.Player;
-import checkers_multiplayer.Peice;
+import checkers_multiplayer.Piece;
 
 public class CheckersClient extends AbstractClient {
 	private CheckersGUI gui;
