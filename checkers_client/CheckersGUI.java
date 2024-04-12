@@ -3,7 +3,7 @@ package checkers_client;
 import java.awt.*;
 import java.util.Vector;
 import javax.swing.*;
-import checkers_multiplayer.Peice;
+import checkers_multiplayer.Piece;
 
 public class CheckersGUI extends JFrame {
 	
