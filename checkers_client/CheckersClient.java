@@ -6,11 +6,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import checkers_multiplayer.Player;
 import ocsf.client.AbstractClient;
-<<<<<<< Updated upstream
 import checkers_multiplayer.Piece;
-=======
-import checkers_multiplayer.Peice;
->>>>>>> Stashed changes
+
 
 public class CheckersClient extends AbstractClient {
 	private CheckersGUI gui;
