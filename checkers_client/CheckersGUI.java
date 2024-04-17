@@ -4,6 +4,7 @@ import java.awt.*;
 import java.util.Vector;
 import javax.swing.*;
 import checkers_multiplayer.Piece;
+import checkers_multiplayer.CheckersPiece;
 
 public class CheckersGUI extends JFrame {
 	
@@ -78,7 +79,41 @@ public class CheckersGUI extends JFrame {
 		this.setVisible(true);
 	}
 	
-	//still need to implement certain parts of the game
+	public void drawBoard(String board[][], int[][] teams) {
+		for (int i = 0; i < 8; i++) {
+			for (int j = 0; j < 8; j++) {
+				if (board[i][j].equals("CheckersPiece") && teams[i][j] == 0) {
+					labels[i][j].setIcon(new ImageIcon(CheckersGUI.class.getResource("/checkers_client/redPiece.png")));
+				}
+				/////////////////////////////////////////////////////////////////////////////////////////////
+
+				else if (board[i][j].equals("CheckersPiece") && teams[i][j] == 1) {
+					labels[i][j].setIcon(new ImageIcon(CheckersGUI.class.getResource("/chechers_client/blackPiece.png")));
+				} else if (board[i][j].equals("empty slot")) {
+					labels[i][j].setIcon(null);
+				}
+			}
+		}
+	}
+
+	public void drawBoardReverse(String board[][], int[][] teams) {
+		for (int i = 0; i < 8; i++) {
+			for (int j = 0; j < 8; j++) {
+				if (board[i][j].equals("CheckersPiece") && teams[i][j] == 0) {
+					//labels[7-i][7-j] = new JButton(new ImageIcon(checkersGUI.class.getResource("/chechers_client/redPiece.png")));
+					labels[7 - i][7 - j].setIcon(new ImageIcon(CheckersGUI.class.getResource("/chechers_client/redPiece.png")));
+				} 
+				/////////////////////////////////////////////////////////////////////////////////////////////
+
+				else if (board[i][j].equals("CheckersPiece") && teams[i][j] == 1) {
+					//labels[7-i][7-j]= new JButton(new ImageIcon(checkersGUI.class.getResource("/chechers_client/blackPiece.png")));
+					labels[7 - i][7 - j].setIcon(new ImageIcon(CheckersGUI.class.getResource("/chechers_client/blackPiece.png")));
+				} else if (board[i][j].equals("empty slot")) {
+					labels[7 - i][7 - j].setIcon(null);
+				}
+			}
+		}
+	}
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub

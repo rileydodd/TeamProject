@@ -31,7 +31,7 @@ public class CreateAccountControl implements ActionListener {
 	    if(command.equals("Submit"))
 	    {
 	    	String username = lp.getUserName().getText();
-	    	String password = lp.getPassword().getText();
+			String password = lp.getPassword().getText();
 	    	String repassword = lp.getrePassword().getText();
 	    	
 	    	if(username.equals(""))

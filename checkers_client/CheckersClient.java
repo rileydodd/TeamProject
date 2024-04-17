@@ -4,9 +4,13 @@ import java.awt.CardLayout;
 import java.io.IOException;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import checkers_multiplayer.Player;
 import ocsf.client.AbstractClient;
+import checkers_multiplayer.Player;
 import checkers_multiplayer.Piece;
+import checkers_multiplayer.GameState;
+import checkers_multiplayer.Response;
+import checkers_multiplayer.Move;
+
 
 
 public class CheckersClient extends AbstractClient {
@@ -36,7 +40,52 @@ public class CheckersClient extends AbstractClient {
 
 	@Override
 	public void handleMessageFromServer(Object arg0) {
-		//Add your code here
+		if (arg0 instanceof String) {
+			if (arg0.equals("START")) {
+				this.cl.show(this.container, "4");
+			}
+			if (arg0.equals("SUCCESS")) {
+				this.cl.show(this.container, "1");
+			}
+		}
+		//this will be recieved when logged in, server will return the player profile
+		if (arg0 instanceof Player) {
+
+			String[][] pieces = new String[8][8];
+			int[][] teams = new int[8][8];
+			Player p = (Player) arg0;
+			this.set_user(p);
+			this.set_id(p.getID());
+			for (int i = 0; i < 8; i++) {
+				for (int j = 0; j < 8; j++) {
+					pieces[i][j] = p.getBoard()[i][j].get_name();
+					teams[i][j] = p.getBoard()[i][j].get_team();
+				}
+			}
+			
+			if (this.user.getID() == 0) {
+				this.gui.drawBoard(pieces, teams);
+
+			}
+			//change perspectove if different player
+			else {
+				this.gui.drawBoardReverse(pieces, teams);
+			}
+
+		}
+
+		if (arg0 instanceof Response) {
+
+			Response res = (Response) arg0;
+			//show board depending on perspective
+			if (this.user.getID() == 0) {
+				this.gui.drawBoard(res.pieces, res.teams);
+			}
+			//
+			else {
+				this.gui.drawBoardReverse(res.pieces, res.teams);
+			}
+		}
 	}
 	
 	public void set_id(int id) {
@@ -48,7 +97,14 @@ public class CheckersClient extends AbstractClient {
 	}
 
 	public void send_move(int[] old_pos, int[] new_pos) {
-		
+		Move mv = new Move(this.user.getID(), old_pos[0], old_pos[1], new_pos[0], new_pos[1]);
+
+		try {
+			this.sendToServer(mv);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	public void connectionException(Throwable exception) {
