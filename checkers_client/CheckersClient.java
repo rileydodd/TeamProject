@@ -97,7 +97,7 @@ public class CheckersClient extends AbstractClient {
 	}
 
 	public void send_move(int[] old_pos, int[] new_pos) {
-		Move mv = new Move(this.user.getID(), old_pos[0], old_pos[1], new_pos[0], new_pos[1]);
+		Move mv = new Move(this.user.getID, old_pos[0], old_pos[1], new_pos[0], new_pos[1]);
 
 		try {
 			this.sendToServer(mv);
