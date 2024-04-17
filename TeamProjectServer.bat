@@ -1,2 +1,2 @@
-java -cp .;ocsf.jar checkers_multiplayer.CheckersServer
+java -cp .;ocsf.jar;mysql-connector-java-5.1.40-bin.jar checkers_multiplayer.CheckersServer
 pause
