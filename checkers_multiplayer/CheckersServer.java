@@ -111,8 +111,8 @@ public class CheckersServer extends AbstractServer{
 			if (ce.validate(mv)) {
 				for (int i = 0; i < 8; i++) {
 					for (int j = 0; j < 8; j++) {
-						pieces[i][j] = ce.getBoard()[i][j].get_name();
-						teams[i][j] = ce.getBoard()[i][j].get_team();
+						pieces[i][j] = ce.getBoard()[i][j].getName();
+						teams[i][j] = ce.getBoard()[i][j].getTeam();
 					}
 				}
 

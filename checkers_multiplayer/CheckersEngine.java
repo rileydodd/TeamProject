@@ -30,7 +30,6 @@ public class CheckersEngine {
             board[endX][endY] = piece;
             board[startX][startY] = new Piece("Empty", -1, -1, -1, new int[]{startX, startY});
 
-     
             checkForCaptures(startX, startY, endX, endY);
 
             switchPlayer();
@@ -66,7 +65,7 @@ public class CheckersEngine {
             return false;
         }
 
-        if (!board[endX][endY].get_name().equals("Empty")) {
+        if (!board[endX][endY].getName().equals("Empty")) {
             return false;
         }
 
