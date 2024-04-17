@@ -20,11 +20,10 @@ public class GameControl implements MouseListener {
 		this.client = client;
 		this.gui = gui;
 	}
-	
 	@Override
-	public void mouseClicked(MouseEvent e) {
-		
-	}
+    public void mouseClicked(MouseEvent e) {
+        
+    }
 	
 	private void setMousePosition(MouseEvent e) {
 
