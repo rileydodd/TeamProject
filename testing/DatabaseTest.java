@@ -118,7 +118,6 @@ public class DatabaseTest {
 		assertEquals("Check getScore method", expectedScore, actualScore);
 	}
 
-	//Test query method
 	@Test
 	public void testQuery() throws Exception {
 
