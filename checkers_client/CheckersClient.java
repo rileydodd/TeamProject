@@ -58,8 +58,8 @@ public class CheckersClient extends AbstractClient {
 			this.set_id(p.getID());
 			for (int i = 0; i < 8; i++) {
 				for (int j = 0; j < 8; j++) {
-					pieces[i][j] = p.getBoard()[i][j].get_name();
-					teams[i][j] = p.getBoard()[i][j].get_team();
+					pieces[i][j] = p.getBoard()[i][j].getName();
+					teams[i][j] = p.getBoard()[i][j].getTeam();
 				}
 			}
 			
@@ -97,7 +97,7 @@ public class CheckersClient extends AbstractClient {
 	}
 
 	public void send_move(int[] old_pos, int[] new_pos) {
-		Move mv = new Move(this.user.getID, old_pos[0], old_pos[1], new_pos[0], new_pos[1]);
+		Move mv = new Move(this.user.getID(), old_pos[0], old_pos[1], new_pos[0], new_pos[1]);
 
 		try {
 			this.sendToServer(mv);
