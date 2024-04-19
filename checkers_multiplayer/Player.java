@@ -20,7 +20,7 @@ public class Player implements Serializable{
 	private ArrayList<Piece> pieces;
 	private boolean staleMate;
 	
-	public Player(String name, int id, Piece[][] checkersBoard, ArrayList<Piece> pieces) {
+	public Player(String name, int id, Piece[][] checkersBoard, ArrayList<Piece> pieces, int team) {
 		this.name = name;
 		this.id = id;
 		this.checkersBoard = checkersBoard;
@@ -46,7 +46,7 @@ public class Player implements Serializable{
 		this.pieces = pieces;
 	}
 	
-	public void setTeam() {
+	public void setTeam(int team) {
 		this.team = team;
 	}
 	
