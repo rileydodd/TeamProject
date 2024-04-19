@@ -53,10 +53,17 @@ public class Player implements Serializable{
 	public void staleMated() {
 		this.staleMate = true;
 	}
+	
+	 public void setColor(int color)
+	    {
+	        this.color = color;
+	    }
+	 
 
 	public Piece[][] getBoard() {
 		return this.checkersBoard;
 	}
+	
 
 	// GETTERS
 	public int getID() {
@@ -83,21 +90,13 @@ public class Player implements Serializable{
 		return this.staleMate;
 	}
 
-    /**
-     * @return the color
-     */
-    public int getColor()
+	public int getColor()
     {
         return color;
     }
 
-    /**
-     * @param color the color to set
-     */
-    public void setColor(int color)
-    {
-        this.color = color;
-    }
+    
+   
 
 
 }
