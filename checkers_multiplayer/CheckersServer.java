@@ -66,8 +66,8 @@ public class CheckersServer extends AbstractServer{
 		    }
 
 		    //instantiate two players 
-		    player1 = new Player("player1", 0, board, player_1_pieces);
-		    player2 = new Player("player2", 1, board, player_2_pieces);
+		    player1 = new Player("player1", 0, board, player_1_pieces, 1);
+		    player2 = new Player("player2", 1, board, player_2_pieces, 2);
 
 		    this.ce = new CheckersEngine(board, player1, player2);
 
