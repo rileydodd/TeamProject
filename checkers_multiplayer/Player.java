@@ -82,4 +82,6 @@ public class Player implements Serializable{
 	public boolean is_stalemate() {
 		return this.staleMate;
 	}
+
+
 }
