@@ -83,5 +83,21 @@ public class Player implements Serializable{
 		return this.staleMate;
 	}
 
+    /**
+     * @return the color
+     */
+    public int getColor()
+    {
+        return color;
+    }
+
+    /**
+     * @param color the color to set
+     */
+    public void setColor(int color)
+    {
+        this.color = color;
+    }
+
 
 }
