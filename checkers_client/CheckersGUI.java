@@ -39,7 +39,7 @@ public class CheckersGUI extends JFrame {
 
 		int Xaxis = 0, Yaxis = -100;
 
-		this.client = new CheckersClient(this, "127.0.0.1", 8300, cl, container);
+		this.client = new CheckersClient(this, "10.251.17.17", 8300, cl, container);
 		
 		GameControl gc = new GameControl(labels, client, this);
 		
@@ -73,7 +73,7 @@ public class CheckersGUI extends JFrame {
 		container.add(panel, "4");
 
 		this.add(container, BorderLayout.CENTER);
-		cl.show(container, "4");
+		cl.show(container, "1");
 
 		this.setSize(800, 800);
 		this.setVisible(true);
