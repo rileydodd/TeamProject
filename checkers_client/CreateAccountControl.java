@@ -2,6 +2,9 @@ package checkers_client;
 
 import java.awt.*;
 import javax.swing.*;
+
+import ocsf.client.AbstractClient;
+
 import java.awt.event.*;
 import java.io.IOException;
 
@@ -26,6 +29,13 @@ public class CreateAccountControl implements ActionListener {
 	public void actionPerformed(ActionEvent ae) {
 		String command = ae.getActionCommand();
 	    int count = container.getComponentCount();
+	  
+		try {
+			client.sendToServer("hello server");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	    CreateAccount lp = (CreateAccount)container.getComponent(2);
 	    
 	    if(command.equals("Submit"))
