@@ -4,12 +4,10 @@ import ocsf.server.AbstractServer;
 import ocsf.server.ConnectionToClient;
 import javax.swing.*;
 import checkers_client.*;
-
-
 import java.awt.*;
 import java.io.IOException;
 import java.lang.Runnable;
-
+import java.sql.SQLException;
 import java.util.*;
 
 //Checkers server for communication
@@ -23,6 +21,7 @@ public class CheckersServer extends AbstractServer{
 	private Player player2;
 	private int num_players;
 	private Piece[][] board;
+	private boolean running = false;
 	
 	public CheckersServer() {
 		super(8300);
@@ -81,22 +80,78 @@ public class CheckersServer extends AbstractServer{
 		}
 	}
 	
-	public void setLog(JTextArea log) {
+	// Getter that returns whether the server is currently running.
+	public boolean isRunning()
+	{
+		return running;
+	}
+	
+	// Setters for the data fields corresponding to the GUI elements.
+	public void setLog(JTextArea log)
+	{
 		this.log = log;
 	}
 
+	public void setStatus(JLabel status)
+	{
+		this.status = status;
+	}
+	
 	public JTextArea getLog() {
 		return log;
 	}
 
-	public void setStatus(JLabel status) {
-		this.status = status;
+	// When the server starts, update the GUI.
+	public void serverStarted()
+	{
+		running = true;
+		status.setText("Listening");
+		log.append("Server started\n");
+	}
+	
+	// When the server stops listening, update the GUI.
+	public void serverStopped()
+	{
+		status.setText("Stopped");
+		log.append("Server stopped accepting new clients - press Listen to start accepting new clients\n");
+	}
+	
+	// When the server closes completely, update the GUI.
+	public void serverClosed()
+	{
+		running = false;
+		status.setText("Close");
+		log.append("Server and all current clients are closed - press Listen to restart\n");
 	}
 
-	public JLabel getStatus() {
-		return status;
-	}
+	// When a client connects or disconnects, display a message in the log.
+	public void clientConnected(ConnectionToClient client)
+	{
+		log.append("Client " + client.getId() + " connected\n");
+		if (num_players == 0) {
+			try {
+				client.sendToClient(player1);
+				num_players = 1;
+				return;
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 
+		if (num_players == 1) {
+			try {
+				client.sendToClient(player2);
+				num_players = 2;
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	
+	
 	@Override
 	protected void clientDisconnected(ConnectionToClient arg0) {
 		this.stopListening();
@@ -130,9 +185,6 @@ public class CheckersServer extends AbstractServer{
 				e1.printStackTrace();
 			}
 		       LoginData loginData = (LoginData)arg0;
-		       System.out.print("dfasdfrfrf");
-				//databasefile.checkLogin(loginData.getUserName(), loginData.getPassword());
-				//boolean x = databasefile.checkLogin(loginData.getUserName(), loginData.getPassword());
 				String[] login_data = databasefile.load_data();
 				System.out.println("in login "+ x );
 				
@@ -218,44 +270,25 @@ public class CheckersServer extends AbstractServer{
 				}
 
 		           System.out.println("Username/Password    " + creatAccountData.getUsername() + "/" + creatAccountData.getPassword() + "/" + creatAccountData.getPassword());
-		           
 		        }
-
 	}
 	
-	@Override
-	protected void listeningException(Throwable exception) {
-    System.out.println("listenting exception");
+	// Method that handles listening exceptions by displaying exception information.
+	public void listeningException(Throwable exception) 
+	{
+		running = false;
+		status.setText("Exception occurred while listening");
+		log.append("Listening exception: " + exception.getMessage() + "\n");
+		log.append("Press Listen to restart server\n");
 	}
-
-	@Override
-	protected void clientConnected(ConnectionToClient client) {
-
-		System.out.println("Server Connected");
-		if (num_players == 0) {
-			try {
-				client.sendToClient(player1);
-				num_players = 1;
-				return;
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-
-		if (num_players == 1) {
-			try {
-				client.sendToClient(player2);
-				num_players = 2;
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-		
+	  
+	//Setter for database
+	public void setDatabase(DatabaseFile database)
+	{
+		this.databasefile = database;
 	}
-
+	  
 	public static void main(String[] args) {
-		CheckersServer server = new CheckersServer(8300, 500);
+		new CheckersServer(8300, 500);
 	}
 }
