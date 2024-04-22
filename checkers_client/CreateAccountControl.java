@@ -2,8 +2,6 @@ package checkers_client;
 
 import java.awt.*;
 import javax.swing.*;
-
-import lab7out.CreateAccountPanel;
 import ocsf.client.AbstractClient;
 
 import java.awt.event.*;
@@ -73,7 +71,7 @@ public class CreateAccountControl implements ActionListener {
 	    			client.sendToServer(createAccountData);
 	    		} catch (IOException e) {
 	    			// TODO Auto-generated catch block
-	    			e.printStackTrace();
+	    			displayError("Error Connecting to Server.");
 	    		}
 	    	}	
 	    }
