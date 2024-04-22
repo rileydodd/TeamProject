@@ -97,6 +97,10 @@ public class CheckersServer extends AbstractServer{
 		this.status = status;
 	}
 	
+	public JLabel getStatus() {
+		return status;
+	}
+	
 	public JTextArea getLog() {
 		return log;
 	}
@@ -105,14 +109,14 @@ public class CheckersServer extends AbstractServer{
 	public void serverStarted()
 	{
 		running = true;
-		status.setText("Listening");
+		System.out.println("Listening");
 		log.append("Server started\n");
 	}
 	
 	// When the server stops listening, update the GUI.
 	public void serverStopped()
 	{
-		status.setText("Stopped");
+		System.out.println("Stopped");
 		log.append("Server stopped accepting new clients - press Listen to start accepting new clients\n");
 	}
 	
@@ -120,7 +124,7 @@ public class CheckersServer extends AbstractServer{
 	public void serverClosed()
 	{
 		running = false;
-		status.setText("Close");
+		System.out.println("Close");
 		log.append("Server and all current clients are closed - press Listen to restart\n");
 	}
 
@@ -277,7 +281,7 @@ public class CheckersServer extends AbstractServer{
 	public void listeningException(Throwable exception) 
 	{
 		running = false;
-		status.setText("Exception occurred while listening");
+		System.out.println("Exception occurred while listening");
 		log.append("Listening exception: " + exception.getMessage() + "\n");
 		log.append("Press Listen to restart server\n");
 	}
