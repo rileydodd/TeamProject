@@ -3,8 +3,6 @@ package checkers_client;
 import java.awt.*;
 import javax.swing.*;
 
-import lab7out.LoginPanel;
-
 import java.awt.event.*;
 import java.io.IOException;
 
