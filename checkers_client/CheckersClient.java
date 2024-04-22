@@ -29,9 +29,9 @@ public class CheckersClient extends AbstractClient {
 		}
 
 		// Constructor for initializing the client with default settings.
-		public ChatClient()
+		public CheckersClient()
 		{
-			super("localhost", 8300);
+			super("10.252.161.60", 8300);
 		}
 	  
 		// Method that handles messages from the server.
