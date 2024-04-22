@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.util.Vector;
 import javax.swing.*;
 import checkers_multiplayer.Piece;
-import lab7out.ChatClient;
 import checkers_multiplayer.CheckersPiece;
 
 public class CheckersGUI extends JFrame {
