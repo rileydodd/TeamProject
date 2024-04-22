@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.Vector;
 import javax.swing.*;
 import checkers_multiplayer.Piece;
+import lab7out.ChatClient;
 import checkers_multiplayer.CheckersPiece;
 
 public class CheckersGUI extends JFrame {
@@ -28,7 +29,20 @@ public class CheckersGUI extends JFrame {
 	private JPanel container;
 	private JLabel status;
 	
-	public CheckersGUI(String title) {
+	public CheckersGUI() {
+		// Set up the chat client.
+		CheckersClient client = new CheckersClient();
+		client.setHost("10.252.161.60");
+		client.setPort(8300);
+		try
+		{
+			client.openConnection();
+		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
+		}
+		
 		this.setTitle("Checkers");
 		this.setResizable(false);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -40,14 +54,6 @@ public class CheckersGUI extends JFrame {
 		panel.setLayout(null);
 
 		int Xaxis = 0, Yaxis = -100;
-
-		
-		client = new CheckersClient(this, "10.252.161.60", 8300, cl, container);
-		try {
-			client.openConnection();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
 		GameControl gc = new GameControl(labels, client, this);
 		CreateAccountControl cac = new CreateAccountControl(cl, container, client, status);
 	    
@@ -128,7 +134,7 @@ public class CheckersGUI extends JFrame {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		CheckersGUI gui = new CheckersGUI("");
+		new CheckersGUI();
 	}
 
 }
