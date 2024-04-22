@@ -11,12 +11,11 @@ import checkers_multiplayer.GameState;
 import checkers_multiplayer.Response;
 import checkers_multiplayer.Move;
 
-
-
 public class CheckersClient extends AbstractClient {
 	// Private data fields for storing the GUI controllers.
 		private LoginControl loginControl;
 		private CreateAccountControl createAccountControl;
+		private int id;
 
 		// Setters for the GUI controllers.
 		public void setLoginControl(LoginControl loginControl)
@@ -33,6 +32,16 @@ public class CheckersClient extends AbstractClient {
 		{
 			super("10.252.161.60", 8300);
 		}
+		
+		public int get_id() {
+			// TODO Auto-generated method stub
+			return this.id;
+		}
+		
+		public void send_move(int[] old_pos, int[] new_pos) {
+			// TODO Auto-generated method stub
+			
+		}  
 	  
 		// Method that handles messages from the server.
 		public void handleMessageFromServer(Object arg0)
@@ -74,6 +83,5 @@ public class CheckersClient extends AbstractClient {
 					createAccountControl.displayError(error.getMessage());
 				}
 			}
-		}  
-
+		}
 }
