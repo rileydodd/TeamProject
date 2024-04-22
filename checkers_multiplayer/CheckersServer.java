@@ -110,14 +110,13 @@ public class CheckersServer extends AbstractServer{
 	{
 		running = true;
 		System.out.println("Listening");
-		log.append("Server started\n");
+		System.out.println("Server started\n");
 	}
 	
 	// When the server stops listening, update the GUI.
 	public void serverStopped()
 	{
 		System.out.println("Stopped");
-		log.append("Server stopped accepting new clients - press Listen to start accepting new clients\n");
 	}
 	
 	// When the server closes completely, update the GUI.
@@ -125,7 +124,6 @@ public class CheckersServer extends AbstractServer{
 	{
 		running = false;
 		System.out.println("Close");
-		log.append("Server and all current clients are closed - press Listen to restart\n");
 	}
 
 	// When a client connects or disconnects, display a message in the log.
@@ -282,8 +280,7 @@ public class CheckersServer extends AbstractServer{
 	{
 		running = false;
 		System.out.println("Exception occurred while listening");
-		log.append("Listening exception: " + exception.getMessage() + "\n");
-		log.append("Press Listen to restart server\n");
+		System.out.println("Listening exception: " + exception.getMessage() + "\n");
 	}
 	  
 	//Setter for database
