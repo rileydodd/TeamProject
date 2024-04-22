@@ -2,6 +2,9 @@ package checkers_client;
 
 import java.awt.*;
 import javax.swing.*;
+
+import lab7out.ClientGUI;
+import lab7out.CreateAccountPanel;
 import ocsf.client.AbstractClient;
 
 import java.awt.event.*;
@@ -75,6 +78,14 @@ public class CreateAccountControl implements ActionListener {
 	    		}
 	    	}	
 	    }
+	}
+	
+	public void createAccountSuccess() {
+		CreateAccount createAccount = (CreateAccount)container.getComponent(2);
+		CheckersGUI checkersGUI = (CheckersGUI)SwingUtilities.getWindowAncestor(createAccount);
+		//clientGUI.setUser(new User(createAccountPanel.getUsername(), createAccountPanel.getPassword()));
+		CardLayout cardLayout = (CardLayout)container.getLayout();
+		cardLayout.show(container, "4");
 	}
 	
 	public void checker(boolean bool) {
