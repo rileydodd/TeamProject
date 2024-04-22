@@ -11,8 +11,6 @@ import checkers_multiplayer.GameState;
 import checkers_multiplayer.Response;
 import checkers_multiplayer.Move;
 
-
-
 public class CheckersClient extends AbstractClient {
 	// Private data fields for storing the GUI controllers.
 		private LoginControl loginControl;
