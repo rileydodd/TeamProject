@@ -1,6 +1,7 @@
 package checkers_client;
 
 import java.awt.*;
+import java.io.IOException;
 import java.util.Vector;
 import javax.swing.*;
 import checkers_multiplayer.Piece;
@@ -39,8 +40,13 @@ public class CheckersGUI extends JFrame {
 
 		int Xaxis = 0, Yaxis = -100;
 
-		this.client = new CheckersClient(this, "10.251.17.17", 8300, cl, container);
 		
+		client = new CheckersClient(this, "10.252.161.60", 8300, cl, container);
+		try {
+			client.openConnection();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		GameControl gc = new GameControl(labels, client, this);
 		
 		for(int i = 0; i < 8; i++) {

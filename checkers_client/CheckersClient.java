@@ -20,17 +20,14 @@ public class CheckersClient extends AbstractClient {
 	private Player user;
 	private int id;
 
-	public CheckersClient(CheckersGUI clientGUI, String host_name, int port, CardLayout cl, JPanel container) {
+	public CheckersClient(CheckersGUI clientGUI, String host_name, int port, CardLayout cl, JPanel container)
+	{
 		super(host_name, port);
 		this.gui = clientGUI;
 		this.cl = cl;
 		this.container = container;
 		
-		try {
-			this.openConnection();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		
 	}
 	
 
