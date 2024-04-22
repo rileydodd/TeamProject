@@ -15,6 +15,7 @@ public class LoginPanel extends JPanel {
 	private JTextField username;
 	private JPasswordField password;
 	private JLabel jlabel;
+	private JLabel errorLabel;
 	
 	public JTextField getUserName() {
 		return username;
@@ -26,6 +27,11 @@ public class LoginPanel extends JPanel {
 	
 	public JLabel getlabel() {
 	    return jlabel;
+	}
+	
+	public void setError(String error)
+	{
+		errorLabel.setText(error);
 	}
 
 	public LoginPanel(CardLayout cl, JPanel container, CheckersClient client) {

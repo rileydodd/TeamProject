@@ -2,6 +2,9 @@ package checkers_client;
 
 import java.awt.*;
 import javax.swing.*;
+
+import lab7out.LoginPanel;
+
 import java.awt.event.*;
 import java.io.IOException;
 
@@ -41,4 +44,19 @@ public class LoginControl implements ActionListener {
 			cl.show(container, "1");
 		}
 	}
+	
+	public void loginSuccess()
+	{
+		LoginPanel loginPanel = (LoginPanel)container.getComponent(1);
+    
+		CardLayout cardLayout = (CardLayout)container.getLayout();
+		cardLayout.show(container, "4");
+	}
+
+	// Method that displays a message in the error label.
+	public void displayError(String error)
+ 	{
+		LoginPanel loginPanel = (LoginPanel)container.getComponent(1);
+		loginPanel.setError(error);
+ 	}
 }

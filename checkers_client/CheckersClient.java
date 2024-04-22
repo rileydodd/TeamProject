@@ -65,13 +65,13 @@ public class CheckersClient extends AbstractClient {
 				// Display login errors using the login controller.
 				if (error.getType().equals("Login"))
 				{
-					loginControl.displayError(error.getMessage());
+					loginControl.displayError(error.get_message());
 				}
 	      
 				// Display account creation errors using the create account controller.
 				else if (error.getType().equals("CreateAccount"))
 				{
-					createAccountControl.displayError(error.getMessage());
+					createAccountControl.displayError(error.get_message());
 				}
 			}
 		}  
