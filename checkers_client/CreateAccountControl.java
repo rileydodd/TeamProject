@@ -2,11 +2,6 @@ package checkers_client;
 
 import java.awt.*;
 import javax.swing.*;
-
-import lab7out.ClientGUI;
-import lab7out.CreateAccountPanel;
-import ocsf.client.AbstractClient;
-
 import java.awt.event.*;
 import java.io.IOException;
 
