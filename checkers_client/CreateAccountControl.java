@@ -3,6 +3,7 @@ package checkers_client;
 import java.awt.*;
 import javax.swing.*;
 
+import lab7out.CreateAccountPanel;
 import ocsf.client.AbstractClient;
 
 import java.awt.event.*;
@@ -92,5 +93,11 @@ public class CreateAccountControl implements ActionListener {
 	  		this.cl = lp.getCL();
 	  		cl.show(container, "1");
 	  	}
+	}
+	
+	public void displayError(String error)
+	{
+		CreateAccount createAccount = (CreateAccount)container.getComponent(2);
+		createAccount.setError(error);
 	}
 }

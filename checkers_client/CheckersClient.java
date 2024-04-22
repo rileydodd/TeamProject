@@ -19,6 +19,7 @@ public class CheckersClient extends AbstractClient {
 	private JPanel container;
 	private Player user;
 	private int id;
+	private CreateAccountControl createAccountControl;
 
 	public CheckersClient(CheckersGUI clientGUI, String host_name, int port, CardLayout cl, JPanel container)
 	{
@@ -33,6 +34,11 @@ public class CheckersClient extends AbstractClient {
 
     public void set_user(Player user) {
 		this.user = user;
+	}
+    
+    public void setCreateAccountControl(CreateAccountControl createAccountControl)
+	{
+		this.createAccountControl = createAccountControl;
 	}
 
 	@Override

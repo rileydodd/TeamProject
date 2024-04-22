@@ -26,6 +26,7 @@ public class CheckersGUI extends JFrame {
 	private CreateAccount view3;
 	private InitialPanel view4;
 	private JPanel container;
+	private JLabel status;
 	
 	public CheckersGUI(String title) {
 		this.setTitle("Checkers");
@@ -48,6 +49,10 @@ public class CheckersGUI extends JFrame {
 			e.printStackTrace();
 		}
 		GameControl gc = new GameControl(labels, client, this);
+		CreateAccountControl cac = new CreateAccountControl(cl, container, client, status);
+	    
+		//Set the client info
+		client.setCreateAccountControl(cac);
 		
 		for(int i = 0; i < 8; i++) {
 			Xaxis = 0;

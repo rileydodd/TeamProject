@@ -20,6 +20,7 @@ public class CreateAccount extends JPanel {
 	private JLabel status;
 	private CardLayout cl;
 	private CheckersClient client;
+	private JLabel errorLabel;
 	
 	public JTextField getUserName() {
 		return username;
@@ -39,6 +40,10 @@ public class CreateAccount extends JPanel {
 	
 	public CardLayout getCL() {
 		  return cl;
+	}
+	
+	public void setError(String error) {
+		errorLabel.setText(error);
 	}
 
 	public CreateAccount() {	
