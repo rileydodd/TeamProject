@@ -107,7 +107,8 @@ public class CheckersServer extends AbstractServer{
 		if (arg0 instanceof Move) {
 			String[][] pieces = new String[8][8];
 			int[][] teams = new int[8][8];
-
+			System.out.println(arg0);
+			System.out.println(arg1);
 			Move mv = (Move) arg0;
 			if (ce.validate(mv)) {
 				for (int i = 0; i < 8; i++) {
