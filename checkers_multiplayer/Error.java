@@ -23,8 +23,5 @@ public class Error implements Serializable
 	{
 		return this.status_code;
 	}
-
-
-
 }
 

@@ -94,9 +94,4 @@ public class Player implements Serializable{
     {
         return color;
     }
-
-    
-   
-
-
 }

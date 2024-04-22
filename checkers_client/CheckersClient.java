@@ -67,7 +67,7 @@ public class CheckersClient extends AbstractClient {
 				this.gui.drawBoard(pieces, teams);
 
 			}
-			//change perspectove if different player
+			//change perspective if different player
 			else {
 				this.gui.drawBoardReverse(pieces, teams);
 			}
@@ -108,7 +108,7 @@ public class CheckersClient extends AbstractClient {
 	}
 
 	public void connectionException(Throwable exception) {
-		//Add your code here
+		exception.printStackTrace();
 	}
 
 	@Override

@@ -8,16 +8,13 @@ public class Piece implements Serializable
 	int[] pos;
 	int id;
 	int value;
-	boolean moved_once;
+	boolean movedOnce;
 	
-	public Piece(String name, int type, int id, int value, int[] pos)
-	{
-		this.name = name;
-		this.id = id;
-		this.value = value;
-		this.pos = pos;
-		this.moved_once = false;
-	}
+	public Piece(String name, int[] pos) {
+        this.name = name;
+        this.pos = pos;
+        this.movedOnce = false;
+    }
 	
 	public boolean exists()
 	{
@@ -49,18 +46,16 @@ public class Piece implements Serializable
 		return false;
 	}
 	
-	public boolean isMovedOnce()
-	{
-		return moved_once;
-	}
+	public boolean isMovedOnce() {
+        return isMovedOnce();
+    }
+
+    public void moved() {
+        this.movedOnce = true;
+    }
 	
 	public int getID()
 	{
 		return this.id;
-	}
-	
-	public void moved()
-	{
-		this.moved_once = true;
 	}
 }

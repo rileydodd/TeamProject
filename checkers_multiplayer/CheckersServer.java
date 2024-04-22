@@ -54,21 +54,21 @@ public class CheckersServer extends AbstractServer{
 
 		        // Set up white pieces
 		        if ((i + j) % 2 == 0 && i < 3) {
-		            board[i][j] = new CheckersPiece("Red", j, j, j, pos);
+		            board[i][j] = new CheckersPiece("Red", pos);
 		        }
 		        // Set up black pieces
 		        else if ((i + j) % 2 == 0 && i > 4) {
-		            board[i][j] = new CheckersPiece("Black", j, j, j, pos);
+		            board[i][j] = new CheckersPiece("Black", pos);
 		        }
 		        // Set up empty squares
 		        else {
-		            board[i][j] = new Piece("Empty", j, j, j, pos);
+		            board[i][j] = new Piece("Empty", pos);
 		        }
 		    }
 
 		    //instantiate two players 
-		    player1 = new Player("player1", 0, board, player_1_pieces);
-		    player2 = new Player("player2", 1, board, player_2_pieces);
+		    player1 = new Player("player1", 0, board, player_1_pieces, 0);
+		    player2 = new Player("player2", 1, board, player_2_pieces, 1);
 
 		    this.ce = new CheckersEngine(board, player1, player2);
 
@@ -116,11 +116,8 @@ public class CheckersServer extends AbstractServer{
 						teams[i][j] = ce.getBoard()[i][j].getTeam();
 					}
 				}
-
 				this.sendToAllClients(new Response(pieces, teams));
-
 			}
-
 		}
 
 		 if (arg0 instanceof LoginData)
