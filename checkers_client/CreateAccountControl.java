@@ -7,101 +7,83 @@ import java.io.IOException;
 
 public class CreateAccountControl implements ActionListener {
 
-	private CardLayout cl;
-	private JPanel container;
-	private CheckersClient client;
-	private JLabel label;
-	
-	public void setLabel(JLabel label) {
-		this.label = label;
-	}
-	
-	public CreateAccountControl(CardLayout cl, JPanel container, CheckersClient client, JLabel status) {
-		this.cl = cl;
-		this.container = container;
-		this.client = client;
-		this.label = status;
-	}
-	
-	public void actionPerformed(ActionEvent ae) {
-		String command = ae.getActionCommand();
-	    int count = container.getComponentCount();
+	// Private data fields for the container and chat client.
+		private JPanel container;
+		private CheckersClient client;
 	  
-		try {
-			client.sendToServer("hello server");
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		// Constructor for the create account controller.
+		public CreateAccountControl(JPanel container, CheckersClient client)
+		{
+			this.container = container;
+			this.client = client;
 		}
-	    CreateAccount lp = (CreateAccount)container.getComponent(2);
-	    
-	    if(command.equals("Submit"))
-	    {
-	    	String username = lp.getUserName().getText();
-			String password = lp.getPassword().getText();
-	    	String repassword = lp.getrePassword().getText();
-	    	
-	    	if(username.equals(""))
-	    	{
-	    		label.setText("");
-	    		label.setText(label.getText() + "Username field is empty");
-	    	}
-	    	else if(password.equals(""))
-	    	{
-	    		label.setText("");
-	    		label.setText(label.getText() + "Password field is empty");
-	    	}
-	    	else if(password.length() < 6)
-	    	{
-	    		label.setText("");
-	    		label.setText(label.getText() + "Password should be atleast 6 characters");
-	    	}
-	    	else if(!password.equals(repassword))
-	    	{
-	    		label.setText("");
-	    		label.setText(label.getText() + "Passwords do not match");
-	    	}
-	    	else
-	    	{
-	    		CreateAccountData createAccountData = new CreateAccountData(username, password, repassword);
-	    	
-	    		try {
-	    			client.sendToServer(createAccountData);
-	    		} catch (IOException e) {
-	    			// TODO Auto-generated catch block
-	    			displayError("Error Connecting to Server.");
-	    		}
-	    	}	
-	    }
-	}
-	
-	public void createAccountSuccess() {
-		CreateAccount createAccount = (CreateAccount)container.getComponent(2);
-		CheckersGUI checkersGUI = (CheckersGUI)SwingUtilities.getWindowAncestor(createAccount);
-		//clientGUI.setUser(new User(createAccountPanel.getUsername(), createAccountPanel.getPassword()));
-		CardLayout cardLayout = (CardLayout)container.getLayout();
-		cardLayout.show(container, "4");
-	}
-	
-	public void checker(boolean bool) {
-		System.out.print("In checker " + bool);
-		CreateAccount lp = (CreateAccount)container.getComponent(2);
-		System.out.println("In checker");
-	  	if(bool)
-	  	{
-	  		label.setText("Username already exist");
-	  	}
-	  	else
-	  	{
-	  		System.out.print("in else");
-	  		this.cl = lp.getCL();
-	  		cl.show(container, "1");
-	  	}
-	}
-	
-	public void displayError(String error)
-	{
-		CreateAccount createAccount = (CreateAccount)container.getComponent(2);
-		createAccount.setError(error);
-	}
+	  
+		// Handle button clicks.
+		public void actionPerformed(ActionEvent ae)
+		{
+			// Get the name of the button clicked.
+			String command = ae.getActionCommand();
+
+			// The Cancel button takes the user back to the initial panel.
+			if (command == "Cancel")
+			{
+				CardLayout cardLayout = (CardLayout)container.getLayout();
+				cardLayout.show(container, "1");
+			}
+
+			// The Submit button creates a new account.
+			else if (command == "Submit")
+			{
+				// Get the text the user entered in the three fields.
+				CreateAccount createAccountPanel = (CreateAccount)container.getComponent(2);
+				String username = createAccountPanel.getUsername();
+				String password = createAccountPanel.getPassword();
+				String passwordVerify = createAccountPanel.getPasswordVerify();
+
+				// Check the validity of the information locally first.
+				if (username.equals("") || password.equals(""))
+				{
+					displayError("You must enter a username and password.");
+					return;
+				}
+				else if (!password.equals(passwordVerify))
+				{
+					displayError("The two passwords did not match.");
+					return;
+				}
+				if (password.length() < 6)
+				{
+					displayError("The password must be at least 6 characters.");
+					return;
+				}
+	      
+				// Submit the new account information to the server.
+				CreateAccountData data = new CreateAccountData(username, password);
+				try
+				{
+					client.sendToServer(data);
+				}
+				catch (IOException e)
+				{
+					displayError("Error connecting to the server.");
+				}
+			}
+		}
+
+		// After an account is created, set the User object and display the contacts screen.
+		public void createAccountSuccess()
+		{
+			CreateAccount createAccountPanel = (CreateAccount)container.getComponent(2);
+			CheckersGUI checkersGUI = (CheckersGUI)SwingUtilities.getWindowAncestor(createAccountPanel);
+			//clientGUI.setUser(new User(createAccountPanel.getUsername(), createAccountPanel.getPassword()));
+			CardLayout cardLayout = (CardLayout)container.getLayout();
+			cardLayout.show(container, "4");
+		}
+	  
+		// Method that displays a message in the error label.
+		public void displayError(String error)
+		{
+			CreateAccount createAccountPanel = (CreateAccount)container.getComponent(2);
+			createAccountPanel.setError(error);
+		}
 }

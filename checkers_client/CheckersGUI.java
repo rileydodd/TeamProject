@@ -54,8 +54,7 @@ public class CheckersGUI extends JFrame {
 
 		int Xaxis = 0, Yaxis = -100;
 		GameControl gc = new GameControl(labels, client, this);
-		CreateAccountControl cac = new CreateAccountControl(cl, container, client, status);
-	    
+		CreateAccountControl cac = new CreateAccountControl(container,client);
 		//Set the client info
 		client.setCreateAccountControl(cac);
 		
@@ -78,9 +77,18 @@ public class CheckersGUI extends JFrame {
 		JLabel label = new JLabel("", JLabel.CENTER);
 		label.setIcon(new ImageIcon(CheckersGUI.class.getResource("/checkers_client/7344419_orig.png")));
 		label.setBounds(0, 0, 800, 800);
-		view1 = new InitialPanel(cl, container);
-		view2 = new LoginPanel(cl, container, client);
-		view3 = new CreateAccount(cl, container, client);
+		InitialControl ic = new InitialControl(container, client);
+		LoginControl lc = new LoginControl(container,client);
+		
+    
+		//Set the client info
+		client.setLoginControl(lc);
+		client.setCreateAccountControl(cac);
+		JPanel view1 = new InitialPanel(ic);
+		JPanel view2 = new LoginPanel(lc);
+		JPanel view3 = new CreateAccount(cac);
+    
+		// Add the views to the card layout container.
 		container.add(view1, "1");
 		container.add(view2, "2");
 		container.add(view3, "3");
@@ -135,6 +143,5 @@ public class CheckersGUI extends JFrame {
 		// TODO Auto-generated method stub
 		new CheckersGUI();
 	}
-
 }
 

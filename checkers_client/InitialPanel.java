@@ -11,25 +11,32 @@ import java.awt.event.*;
 
 public class InitialPanel extends JPanel {
 
-	public InitialPanel(CardLayout cl, JPanel container) {
-		InitialControl idc = new InitialControl(cl, container);
+	// Constructor for the initial panel.
+		public InitialPanel(InitialControl ic)
+		{
+			// Create the controller.
+			//InitialControl controller = new InitialControl(container);
 	    
-	    JPanel inner = new JPanel(new GridLayout(3,1));
+			// Create the information label.
+			JLabel label = new JLabel("Account Information", JLabel.CENTER);
 	    
-	    JLabel jlabel = new JLabel("Select A Choice Below");
-	   
+			// Create the login button.
+			JButton loginButton = new JButton("Login");
+			loginButton.addActionListener(ic);
+			JPanel loginButtonBuffer = new JPanel();
+			loginButtonBuffer.add(loginButton);
 	    
-	    JButton button1 = new JButton("Login");
-	    JButton button2 = new JButton("Create");
-	    
-	    button1.addActionListener(idc);
-	    button2.addActionListener(idc);
-	    
-	    inner.add(jlabel);
-	    inner.add(button1);
-	    inner.add(button2);
-	    this.add(inner);
-	    
-	    return;
-	}
+			// Create the create account button.
+			JButton createButton = new JButton("Create");
+			createButton.addActionListener(ic);
+			JPanel createButtonBuffer = new JPanel();
+			createButtonBuffer.add(createButton);
+
+			// Arrange the components in a grid.
+			JPanel grid = new JPanel(new GridLayout(3, 1, 5, 5));
+			grid.add(label);
+			grid.add(loginButtonBuffer);
+			grid.add(createButtonBuffer);
+			this.add(grid);
+		}
 }

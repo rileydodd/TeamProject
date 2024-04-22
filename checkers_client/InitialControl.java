@@ -6,24 +6,39 @@ import java.awt.event.*;
 
 public class InitialControl implements ActionListener {
 	
-	private CardLayout cl;
-	private JPanel container;
+	// Private data field for storing the container.
+		private JPanel container;
+		private CheckersClient client;
+		// Constructor for the initial controller.
+		public InitialControl(JPanel container, CheckersClient client)
+		{
+			this.container = container;
+			this.client = client;
+		}
 	  
-	public InitialControl(CardLayout cl, JPanel container) {
-	    this.cl = cl;
-	    this.container = container;
-	}
-	  
-	public void actionPerformed(ActionEvent ae) {
-	    String command = ae.getActionCommand();
+		// Handle button clicks.
+		public void actionPerformed(ActionEvent ae)
+		{
+			// Get the name of the button clicked.
+			String command = ae.getActionCommand();
 	    
-	    if (command.equals("Login"))
-	    {
-	      cl.show(container, "2");
-	    }
-	    else if (command.equals("Create"))
-	    {
-	      cl.show(container, "3");
-	    }
-	}
+			// The Login button takes the user to the login panel.
+			if (command.equals("Login"))
+			{
+				LoginPanel loginPanel = (LoginPanel)container.getComponent(1);
+				loginPanel.setError("");
+				CardLayout cardLayout = (CardLayout)container.getLayout();
+				cardLayout.show(container, "2");
+	     
+			}
+	    
+	  	 // The Create button takes the user to the create account panel.
+			else if (command.equals("Create"))
+			{
+				CreateAccount createAccountPanel = (CreateAccount)container.getComponent(2);
+				createAccountPanel.setError("");
+				CardLayout cardLayout = (CardLayout)container.getLayout();
+				cardLayout.show(container, "3");
+			}
+		}
 }

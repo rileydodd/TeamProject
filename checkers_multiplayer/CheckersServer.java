@@ -143,7 +143,7 @@ public class CheckersServer extends AbstractServer{
 					  System.out.println(temp[0]);
 					  System.out.println(temp[1]);
 
-					  if(!temp[1].contains(""+loginData.getUserName()) )
+					  if(!temp[1].contains(""+loginData.getUsername()) )
 					  {
 						 
 						 if(!temp[1].contains(""+loginData.getPassword()) )
@@ -195,8 +195,8 @@ public class CheckersServer extends AbstractServer{
 		           try {
 		        	   
 		        	 
-					databasefile.writeCredentials(creatAccountData.getUserName(), creatAccountData.getPassword());
-					x = databasefile.checkCredentials(creatAccountData.getUserName(), creatAccountData.getPassword() + "/n");
+					databasefile.writeCredentials(creatAccountData.getUsername(), creatAccountData.getPassword());
+					x = databasefile.checkCredentials(creatAccountData.getUsername(), creatAccountData.getPassword() + "/n");
 					creatAccountData.setCheck(x);
 					if(x)
 					{
@@ -217,7 +217,7 @@ public class CheckersServer extends AbstractServer{
 					e.printStackTrace();
 				}
 
-		           System.out.println("Username/Password    " + creatAccountData.getUserName() + "/" + creatAccountData.getPassword() + "/" + creatAccountData.getrePassword());
+		           System.out.println("Username/Password    " + creatAccountData.getUsername() + "/" + creatAccountData.getPassword() + "/" + creatAccountData.getPassword());
 		           
 		        }
 
