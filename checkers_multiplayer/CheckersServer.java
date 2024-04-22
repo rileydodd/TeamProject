@@ -225,7 +225,7 @@ public class CheckersServer extends AbstractServer{
 	
 	@Override
 	protected void listeningException(Throwable exception) {
-
+    System.out.println("listenting exception");
 	}
 
 	@Override
