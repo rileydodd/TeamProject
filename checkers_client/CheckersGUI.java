@@ -1,6 +1,7 @@
 package checkers_client;
 
 import java.awt.*;
+import java.io.IOException;
 import java.util.Vector;
 import javax.swing.*;
 import checkers_multiplayer.Piece;
@@ -25,8 +26,22 @@ public class CheckersGUI extends JFrame {
 	private CreateAccount view3;
 	private InitialPanel view4;
 	private JPanel container;
+	private JLabel status;
 	
-	public CheckersGUI(String title) {
+	public CheckersGUI() {
+		// Set up the chat client.
+		CheckersClient client = new CheckersClient();
+		client.setHost("10.252.161.60");
+		client.setPort(8300);
+		try
+		{
+			client.openConnection();
+		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
+		}
+		
 		this.setTitle("Checkers");
 		this.setResizable(false);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -38,10 +53,10 @@ public class CheckersGUI extends JFrame {
 		panel.setLayout(null);
 
 		int Xaxis = 0, Yaxis = -100;
-
-		this.client = new CheckersClient(this, "127.0.0.1", 8300, cl, container);
-		
 		GameControl gc = new GameControl(labels, client, this);
+		CreateAccountControl cac = new CreateAccountControl(container,client);
+		//Set the client info
+		client.setCreateAccountControl(cac);
 		
 		for(int i = 0; i < 8; i++) {
 			Xaxis = 0;
@@ -62,9 +77,18 @@ public class CheckersGUI extends JFrame {
 		JLabel label = new JLabel("", JLabel.CENTER);
 		label.setIcon(new ImageIcon(CheckersGUI.class.getResource("/checkers_client/7344419_orig.png")));
 		label.setBounds(0, 0, 800, 800);
-		view1 = new InitialPanel(cl, container);
-		view2 = new LoginPanel(cl, container, client);
-		view3 = new CreateAccount(cl, container, client);
+		InitialControl ic = new InitialControl(container, client);
+		LoginControl lc = new LoginControl(container,client);
+		
+    
+		//Set the client info
+		client.setLoginControl(lc);
+		client.setCreateAccountControl(cac);
+		JPanel view1 = new InitialPanel(ic);
+		JPanel view2 = new LoginPanel(lc);
+		JPanel view3 = new CreateAccount(cac);
+    
+		// Add the views to the card layout container.
 		container.add(view1, "1");
 		container.add(view2, "2");
 		container.add(view3, "3");
@@ -73,7 +97,7 @@ public class CheckersGUI extends JFrame {
 		container.add(panel, "4");
 
 		this.add(container, BorderLayout.CENTER);
-		cl.show(container, "4");
+		cl.show(container, "1");
 
 		this.setSize(800, 800);
 		this.setVisible(true);
@@ -117,8 +141,7 @@ public class CheckersGUI extends JFrame {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		CheckersGUI gui = new CheckersGUI("");
+		new CheckersGUI();
 	}
-
 }
 

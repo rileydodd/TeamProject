@@ -10,30 +10,28 @@ public class CreateAccountData implements Serializable {
 	private String password;
 	private String repassword;
 	private boolean check;
-
-	public String  getUserName() {
-		return this.username;
+	// Getters for the username and password.
+	public String getUsername()
+	{
+		return username;
 	}
-	
-	public void  setUserName(String username ) {
+	public String getPassword()
+	{
+		return password;
+	}
+	  
+	// Setters for the username and password.
+	public void setUsername(String username)
+	{
 		this.username = username;
 	}
-	
-	public String  getPassword() {
-		return this.password;
-	}
-	
-	public void  setPassword(String password) {
+	public void setPassword(String password)
+	{
 		this.password = password;
 	}
-	
-	public String  getrePassword() {
-		return this.repassword;
-	}
-	
-	public void  setrePassword(String repassword) {
-		this.repassword = repassword;
-	}
+	  
+		// Constructor that initializes the username and password.
+
 	
 	public void  setCheck(boolean bool) {
 		this.check = bool;
@@ -43,12 +41,9 @@ public class CreateAccountData implements Serializable {
 		return check;
 	}
 	
-	public CreateAccountData() {
-	}
-	
-	public CreateAccountData(String username, String password, String repassword) {
-		this.username = username;
-		this.password = password;
-		this.repassword = repassword;
+	public CreateAccountData(String username, String password)
+	{
+		setUsername(username);
+		setPassword(password);
 	}
 }

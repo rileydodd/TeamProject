@@ -11,119 +11,77 @@ import checkers_multiplayer.GameState;
 import checkers_multiplayer.Response;
 import checkers_multiplayer.Move;
 
-
-
 public class CheckersClient extends AbstractClient {
-	private CheckersGUI gui;
-	private CardLayout cl;
-	private JPanel container;
-	private Player user;
-	private int id;
+	// Private data fields for storing the GUI controllers.
+		private LoginControl loginControl;
+		private CreateAccountControl createAccountControl;
+		private int id;
 
-	public CheckersClient(CheckersGUI clientGUI, String host_name, int port, CardLayout cl, JPanel container) {
-		super(host_name, port);
-		this.gui = clientGUI;
-		this.cl = cl;
-		this.container = container;
+		// Setters for the GUI controllers.
+		public void setLoginControl(LoginControl loginControl)
+		{
+			this.loginControl = loginControl;
+		}
+		public void setCreateAccountControl(CreateAccountControl createAccountControl)
+		{
+			this.createAccountControl = createAccountControl;
+		}
+
+		// Constructor for initializing the client with default settings.
+		public CheckersClient()
+		{
+			super("10.252.161.60", 8300);
+		}
 		
-		try {
-			this.openConnection();
-		} catch (IOException e) {
-			e.printStackTrace();
+		public int get_id() {
+			// TODO Auto-generated method stub
+			return this.id;
 		}
-	}
-	
-
-    public void set_user(Player user) {
-		this.user = user;
-	}
-
-	@Override
-	public void handleMessageFromServer(Object arg0) {
-		if (arg0 instanceof String) {
-			if (arg0.equals("START")) {
-				this.cl.show(this.container, "4");
-			}
-			if (arg0.equals("SUCCESS")) {
-				this.cl.show(this.container, "1");
-			}
-		}
-		//this will be recieved when logged in, server will return the player profile
-		if (arg0 instanceof Player) {
-
-			String[][] pieces = new String[8][8];
-			int[][] teams = new int[8][8];
-			Player p = (Player) arg0;
-			this.set_user(p);
-			this.set_id(p.getID());
-			for (int i = 0; i < 8; i++) {
-				for (int j = 0; j < 8; j++) {
-					pieces[i][j] = p.getBoard()[i][j].getName();
-					teams[i][j] = p.getBoard()[i][j].getTeam();
+		
+		public void send_move(int[] old_pos, int[] new_pos) {
+			// TODO Auto-generated method stub
+			
+		}  
+	  
+		// Method that handles messages from the server.
+		public void handleMessageFromServer(Object arg0)
+		{
+			// If we received a String, figure out what this event is.
+			if (arg0 instanceof String)
+			{
+				// Get the text of the message.
+				String message = (String)arg0;
+	      
+				// If we successfully logged in, tell the login controller.
+				if (message.equals("LoginSuccessful"))
+				{
+					loginControl.loginSuccess();
+				}
+	      
+				// If we successfully created an account, tell the create account controller.
+				else if (message.equals("CreateAccountSuccessful"))
+				{
+					createAccountControl.createAccountSuccess();
 				}
 			}
-			
-			if (this.user.getID() == 0) {
-				this.gui.drawBoard(pieces, teams);
-
-			}
-			//change perspectove if different player
-			else {
-				this.gui.drawBoardReverse(pieces, teams);
-			}
-
-		}
-
-		if (arg0 instanceof Response) {
-
-			Response res = (Response) arg0;
-			//show board depending on perspective
-			if (this.user.getID() == 0) {
-				this.gui.drawBoard(res.pieces, res.teams);
-			}
-			//
-			else {
-				this.gui.drawBoardReverse(res.pieces, res.teams);
+	    
+			// If we received an Error, figure out where to display it.
+			else if (arg0 instanceof Error)
+			{
+				// Get the Error object.
+				Error error = (Error)arg0;
+	      
+				// Display login errors using the login controller.
+				if (error.getType().equals("Login"))
+				{
+					loginControl.displayError(error.getMessage());
+				}
+	      
+				// Display account creation errors using the create account controller.
+				else if (error.getType().equals("CreateAccount"))
+				{
+					createAccountControl.displayError(error.getMessage());
+				}
 			}
 		}
-	}
-	
-	public void set_id(int id) {
-		this.id = id;
-	}
-
-	public int get_id() {
-		return this.id;
-	}
-
-	public void send_move(int[] old_pos, int[] new_pos) {
-		Move mv = new Move(this.user.getID(), old_pos[0], old_pos[1], new_pos[0], new_pos[1]);
-
-		try {
-			this.sendToServer(mv);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-
-	public void connectionException(Throwable exception) {
-		//Add your code here
-	}
-
-	@Override
-	public void connectionClosed() {
-		try {
-			this.closeConnection();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-
-	@Override
-	public void connectionEstablished() {
-
-	}
-
 }

@@ -14,16 +14,18 @@ public class Player implements Serializable{
 	private int id;
 	private int score;
 	private String name;
+	private int team;
 	private int color; // 0 - red, 1 -black 
 	private Piece[][] checkersBoard;
 	private ArrayList<Piece> pieces;
 	private boolean staleMate;
 	
-	public Player(String name, int id, Piece[][] checkersBoard, ArrayList<Piece> pieces) {
+	public Player(String name, int id, Piece[][] checkersBoard, ArrayList<Piece> pieces, int team) {
 		this.name = name;
 		this.id = id;
 		this.checkersBoard = checkersBoard;
 		this.score = 0;
+		this.team = team;
 		this.staleMate = false;
 		this.pieces = pieces;
 	}
@@ -44,13 +46,24 @@ public class Player implements Serializable{
 		this.pieces = pieces;
 	}
 	
+	public void setTeam(int team) {
+		this.team = team;
+	}
+	
 	public void staleMated() {
 		this.staleMate = true;
 	}
+	
+	 public void setColor(int color)
+	    {
+	        this.color = color;
+	    }
+	 
 
 	public Piece[][] getBoard() {
 		return this.checkersBoard;
 	}
+	
 
 	// GETTERS
 	public int getID() {
@@ -59,6 +72,10 @@ public class Player implements Serializable{
 
 	public int getScore() {
 		return this.score;
+	}
+	
+	public int getTeam() {
+		return this.team;
 	}
 
 	public String getName() {
@@ -72,4 +89,9 @@ public class Player implements Serializable{
 	public boolean is_stalemate() {
 		return this.staleMate;
 	}
+
+	public int getColor()
+    {
+        return color;
+    }
 }

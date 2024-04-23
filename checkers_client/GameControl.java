@@ -49,7 +49,8 @@ public class GameControl implements MouseListener {
                         if (this.client.get_id() == 0) {
                             gui.New_pos[0] = i;
                             gui.New_pos[1] = j;
-                            labels[gui.Old_pos[0]][gui.Old_pos[1]].setBorder(BorderFactory.createEmptyBorder());                            gui.isClicked = false;
+                            labels[gui.Old_pos[0]][gui.Old_pos[1]].setBorder(BorderFactory.createEmptyBorder());                            
+                            gui.isClicked = false;
                             this.client.send_move(gui.Old_pos, gui.New_pos);
 
                         } else {
@@ -66,6 +67,7 @@ public class GameControl implements MouseListener {
             }
     }
 	
+	@SuppressWarnings("unused")
 	private void setMousePosition(MouseEvent e) {
 
 	}
@@ -75,8 +77,6 @@ public class GameControl implements MouseListener {
 	  //System.out.print("In pressed");
         for (int i = 0; i < 8; i++)
             for (int j = 0; j < 8; j++) {
-            
-
                 if (e.getSource() == labels[i][j]) {
                     labels[i][j].setBorder(BorderFactory.createLineBorder(Color.black));
                     

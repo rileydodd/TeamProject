@@ -2,69 +2,41 @@ package checkers_multiplayer;
 
 import java.io.Serializable;
 
-public class CheckersPiece extends Piece{
+public class CheckersPiece extends Piece implements Serializable{
 	
-	public CheckersPiece(String name, int type, int id, int value, int[] pos)
-	{
-		super(name, type, id, value, pos);
-		// TODO Auto-generated constructor stub
-	}
+	 public CheckersPiece(String name, int[] pos) {
+	        super(name, pos);
+	    }
 
-	public boolean move_piece(int[] new_pos, Piece[][] board) 
-	{
-			if((pos[0] == new_pos[0])||(pos[1] == new_pos[1]))
-			{
-				return false;
-			}
-			
-			//check if diaognals same change
-			int distance_x = Math.abs(pos[0] - new_pos[0]);
-			int distance_y = Math.abs(pos[1] - new_pos[1]);
-			if(distance_x != distance_y)
-			{
-				return false;
-			}
-			
-			/*  CHECK LINE OF SIGHT  */
-			
-			//set the direction of line of sight to the target
-			int direction_x = 1;
-			int direction_y = 1;
-			//if less, then direction will be backward in this axis
-			if(pos[0] > new_pos[0])
-			{
-				direction_x = -1;
-			}
-			if(pos[1] > new_pos[1])
-			{
-				direction_y = -1;
-			}
-			int current_pos_x = pos[0];
-			int current_pos_y = pos[1]; 
-			//walk in the direction of line of sight
-			for(int i = 1 ; i < distance_x; i++)
-			{
-				current_pos_x = pos[0] + (i * direction_x);
-				current_pos_y = pos[1] + (i * direction_y);	
-				if(board[current_pos_x][current_pos_y].exists())
-				{
-					return false;
-				}	
-			}
-			if((new_pos[0] == this.getPos()[0] ) && (new_pos[1] == this.getPos()[1] ))
-			{
-				return false;
-			}
+	    public boolean isValidMove(int[] newPos, Piece[][] board) {
+	        int startX = this.getPos()[0];
+	        int startY = this.getPos()[1];
+	        int endX = newPos[0];
+	        int endY = newPos[1];
 
+	        // Check if the new position is within the bounds of the board
+	        if (endX < 0 || endX >= board.length || endY < 0 || endY >= board[0].length) {
+	            return false;
+	        }
 
-			return true;
+	        // Check if the destination position is empty
+	        if (!board[endX][endY].getName().equals("Empty")) {
+	            return false;
+	        }
 
-	}
+	        // Check if the move is diagonal
+	        if (Math.abs(endX - startX) != 1 || Math.abs(endY - startY) != 1) {
+	            return false;
+	        }
 
-	public boolean exists()
-	{
-		return true;
-	}
+	        // Check if the move direction corresponds to the piece's team
+	        if (this.getTeam() == 0 && endX > startX) {
+	            return false; // Red pieces can only move upwards
+	        }
+	        if (this.getTeam() == 1 && endX < startX) {
+	            return false; // Black pieces can only move downwards
+	        }
 
-
+	        return true;
+	    }
 }

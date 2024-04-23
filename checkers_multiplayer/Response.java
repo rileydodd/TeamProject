@@ -15,9 +15,3 @@ public class Response implements Serializable
 	
 	
 }
-
-
-
-  
-
-

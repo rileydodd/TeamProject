@@ -4,23 +4,34 @@ import java.io.Serializable;
 
 public class Error implements Serializable {
 
-	private String Err_message;
-	private int status_code;
-	
-	public Error(String err_message, int i ) 
+	// Data field for storing the error message and type.
+	private String message;
+	private String type;
+	  
+	// Getters for the error message and type.
+	public String getMessage()
 	{
-		this.Err_message = err_message;
-		this.status_code = i;
+		return message;
 	}
-
-	public String get_message()
+	public String getType()
 	{
-		return this.Err_message;
-		
-		
+		return type;
 	}
-	public int get_status_code()
+	  
+	// Setters for the error message and type.
+	public void setMessage(String message)
 	{
-		return this.status_code;
+		this.message = message;
+	}
+	public void setType(String type)
+	{
+		this.type = type;
+	}
+	  
+	// Constructor for creating a new Error object with a message and type.
+	public Error(String message, String type)
+	{
+		setMessage(message);
+		setType(type);
 	}
 }
